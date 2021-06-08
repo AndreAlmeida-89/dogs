@@ -10,7 +10,7 @@ export const Container = styled.button`
   color: #764701;
   min-width: 8rem;
   padding: 0.8rem 1.2rem;
-  transition: 0.1s;
+  transition: 0.2s;
 
   :hover,
   :focus {

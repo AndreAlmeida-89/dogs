@@ -1,13 +1,20 @@
 import React from "react";
 
-import { Container} from "./styles";
+import { Container } from "./styles";
 
-function Input({ label, type, name, onChange }) {
+function Input({ label, type, name, onChange, error, value, onBlur }) {
   return (
     <Container>
       <label htmlFor={name}>{label}</label>
-      <input id={name} type={type} onChange={onChange} />
-      <p>Error</p>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        onChange={onChange}
+        value={value}
+        onBlur={onBlur}
+      />
+      {error && <p>{error}</p>}
     </Container>
   );
 }

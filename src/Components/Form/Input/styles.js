@@ -21,6 +21,7 @@ export const Container = styled.div`
       box-shadow: 0 0 0 3px #fea;
     }
   }
+  
   label {
     display: block;
     font-size: 1rem;
