@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import useForm from "../../../Hooks/useForm";
 import api from "../../../Services/httpService";
@@ -10,13 +10,13 @@ function LoginForm() {
   let { url } = useRouteMatch();
   const username = useForm('email');
   const password = useForm();
-
+  
   async function handleSubmit(event) {
     event.preventDefault();
     try {
       const response = await api.post("json/jwt-auth/v1/token", {
-        username,
-        password,
+        username: username.value,
+        password: password.value,
       });
       const { data } = await response;
       console.log(data);
