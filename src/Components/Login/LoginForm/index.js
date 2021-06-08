@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import api from "../../../Services/httpService";
 
 import { Form } from "./styles";
 
@@ -8,26 +8,6 @@ function LoginForm() {
   let { url } = useRouteMatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const api = axios.create({
-    baseURL: "https://dogsapi.origamid.dev",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  api.interceptors.response.use(null, (error) => {
-    const isExpectedError =
-      error.response &&
-      error.response.status >= 404 &&
-      error.response.status < 500;
-
-    if (!isExpectedError) {
-      console.log("Erro ocorrido:", error);
-      alert("Um erro inesperado ocorreu.");
-    }
-    return Promise.reject(error);
-  });
 
   async function handleSubmit(event) {
     event.preventDefault();

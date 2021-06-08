@@ -7,11 +7,12 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body{
+    padding-top: 4rem;
     margin: 0px;
     color: #333;
     --type-first: Helvetica, Arial, sans-serif;
     --type-second: 'Spectral', Georgia;
-    font-family: var(--type-first)
+    font-family: var(--type-first);
 }
 
 img{
@@ -26,6 +27,11 @@ button, input{
     color: #333;
 }
 
+a{
+    text-decoration: none;
+}
 `;
+
+
 
 export default GlobalStyle;

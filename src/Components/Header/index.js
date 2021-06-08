@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { ReactComponent as Dogs } from "../../Assets/dogs.svg";
 
-import { Container } from "./styles";
+import { Container, Nav, LinkLogin, LinkLogo } from "./styles";
 
 function Header() {
   return (
     <Container>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-      </nav>
+      <Nav>
+        <LinkLogo to="/" aria-label="Dogs - Home">
+          <Dogs />
+        </LinkLogo>
+        <LinkLogin to="/login">Login / Criar</LinkLogin>
+      </Nav>
     </Container>
   );
 }
