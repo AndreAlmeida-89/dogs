@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import api from "../../../Services/httpService";
-
-import { Form } from "./styles";
+import Form from "../../Form";
+import Button from "../../Form/Button";
+import Input from "../../Form/Input";
 
 function LoginForm() {
   let { url } = useRouteMatch();
@@ -29,15 +30,19 @@ function LoginForm() {
     <section>
       <h1>Login</h1>
       <Form onSubmit={handleSubmit}>
-        <input
+        <Input
           type="text"
+          name="username"
+          label="Usuário"
           onChange={({ target }) => setUsername(target.value)}
         />
-        <input
+        <Input
           type="password"
+          name="password"
+          label="Senha"
           onChange={({ target }) => setPassword(target.value)}
         />
-        <button>Entar</button>
+        <Button>Entar</Button>
       </Form>
 
       <Link to={`${url}/criar`}>Cadastro</Link>
