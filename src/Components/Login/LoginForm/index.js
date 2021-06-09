@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import { UserContext } from "../../../Contexts/UserContext";
 import useForm from "../../../Hooks/useForm";
 import api from "../../../Services/httpService";
 import Form from "../../Form";
@@ -8,22 +9,15 @@ import Input from "../../Form/Input";
 
 function LoginForm() {
   let { url } = useRouteMatch();
-  const username = useForm('email');
+  const username = useForm("email");
   const password = useForm();
+
+  const { userLogin } = useContext(UserContext);
   
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      const response = await api.post("json/jwt-auth/v1/token", {
-        username: username.value,
-        password: password.value,
-      });
-      const { data } = await response;
-      console.log(data);
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        alert("Erro 404: O servidor não pode encontrar o recurso solicitado.");
-      }
+    if (true) {
+      userLogin(username.value, password.value);
     }
   }
 
