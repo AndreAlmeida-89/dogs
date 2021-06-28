@@ -1,8 +1,7 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { UserContext } from "../../../Contexts/UserContext";
 import useForm from "../../../Hooks/useForm";
-import api from "../../../Services/httpService";
 import Form from "../../Form";
 import Button from "../../Form/Button";
 import Input from "../../Form/Input";
@@ -13,7 +12,7 @@ function LoginForm() {
   const password = useForm();
 
   const { userLogin } = useContext(UserContext);
-  
+
   async function handleSubmit(event) {
     event.preventDefault();
     if (true) {

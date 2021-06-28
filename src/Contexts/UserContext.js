@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 import api from "../Services/httpService";
 
@@ -9,11 +10,35 @@ export function UserStorage({ children }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
-    if (token) {
-      getUser(token);
+    async function autoLogin() {
+      const token = window.localStorage.getItem("token");
+      console.log(token);
+      if (token) {
+        try {
+          setError(null);
+          setLoading(true);
+          api.defaults.headers.post = { Authorization: `Bearer ${token}` };
+          const response = await api.post("/jwt-auth/v1/token/validate");
+          if (!response) throw new Error("Token Inválido");
+          await getUser(token);
+        } catch (error) {
+          userLogOut()
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      }
     }
+    autoLogin();
   }, []);
+
+  async function userLogOut() {
+    setData(null);
+    setError(null);
+    setLoading(false);
+    setLogin(false);
+    window.localStorage.removeItem("token");
+  }
 
   async function getUser(token) {
     const resp = await api.get("/api/user", {
@@ -44,7 +69,7 @@ export function UserStorage({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ userLogin, data }}>
+    <UserContext.Provider value={{ userLogin, userLogOut, data }}>
       {children}
     </UserContext.Provider>
   );
